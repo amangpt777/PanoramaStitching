@@ -8,10 +8,17 @@ function [f0, f1] = computeFocalLength(H_3X3, type)
 if H_3x3(2,3) ~= H_3x3(1,3)
     f0 = sqrt(((H_3x3(2,3)^2) - (H_3x3(1,3)^2)) / (H_3x3(1,1)^2) + (H_3x3(1,2)^2) - (H_3x3(2,1)^2) - (H_3x3(2,2)^2));
     %%%%%%CALCULATE f1 here
+    f1 = sqrt(((H_3x3(3,2)^2) - (H_3x3(3,1)^2)) / (H_3x3(1,1)^2) + (H_3x3(2,1)^2) - (H_3x3(1,2)^2) - (H_3x3(2,2)^2));
 end
-   
-if type == 'fixed'
+
+if H_3x3(2,3) ~= 0 && H_3x3(1,3) ~= 0
+    f0 = sqrt( - (  ((H_3x3(2,1) * H_3x3(1,1)) + (H_3x3(1,2) * H_3x3(2,2))  ) / (H_3x3(1,3) * H_3x3(2,3))));
+    f1 = sqrt( - (  ((H_3x3(1,2) * H_3x3(1,1)) + (H_3x3(2,1) * H_3x3(2,2))  ) / (H_3x3(3,1) * H_3x3(3,2))));
+end
+
+if strcmp(type, 'fixed')
     %%%%%%take geometric mean
+    f0 = sqrt(f0 * f1);
 end
 
 end
