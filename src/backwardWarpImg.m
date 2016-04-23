@@ -15,13 +15,13 @@ HWZ = [WW; HH; ones(1, dest_canvas_height * dest_canvas_width) * f1];
 
 % inv(H) * [xd, yd, 1]' = [xs, ys, zs]'
 S =  resultToSrc_H * HWZ;
-SHW = [S(1,:)./S(3,:); S(2,:)./S(3,:)]; % first row is width, column-segment
+SHW = [S(1,:)./S(3,:).* f0; S(2,:)./S(3,:).*f0]; % first row is width, column-segment
 
 
 x = reshape(SHW(1, :), dest_canvas_width_height(2), ...
-    dest_canvas_width_height(1)) / f0 ; % column segment m x n
+    dest_canvas_width_height(1)) ; % column segment m x n
 y = reshape(SHW(2, :), dest_canvas_width_height(2), ...
-    dest_canvas_width_height(1)) / f0;
+    dest_canvas_width_height(1));
 result_img = zeros(dest_canvas_width_height(2), dest_canvas_width_height(1));
 
 % interp2(X,Y,V,Xq,Yq), where X= 1:n, Y=1:m, [m,n] = size(V)
