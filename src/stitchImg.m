@@ -17,12 +17,13 @@ for i = 2 : (nargin - 1)
     center_img(isnan(center_img)) = 0;
     [inliers_id, H_3x3] = runRANSAC(xs, xd, ransac_n, ransac_eps);
     [f0, f1] = computeFocalLength(H_3x3, focal_length_type);
+    R_3x3 = computeRotationalMatrix(xs, xd, f0, f1);
     
     imgd = im2double(center_img);
     imgs = im2double(source_img);
     maskSource = logical(imgd(:,:,1));
     dest_canvas_width_height = [size(imgd, 2) size(imgd, 1)];
-    [mask, dest_img] = backwardWarpImg(imgs, inv(H_3x3), dest_canvas_width_height);
+    [mask, dest_img] = backwardWarpImg(imgs, inv(R_3x3), dest_canvas_width_height, f0, f1);
     blended_result = blendImagePair(dest_img, mask, imgd, maskSource,...
     'blend');
     imshow(blended_result);
