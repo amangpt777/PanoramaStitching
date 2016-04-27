@@ -1,4 +1,4 @@
-function [inliers_id, H] = runRANSAC(Xs, Xd, ransac_n, eps)
+function [inliers_id, H] = runRANSAC_H(Xs, Xd, ransac_n, eps)
 % inlier number
 np = size(Xs,1);
 max_inlierNum = 0;

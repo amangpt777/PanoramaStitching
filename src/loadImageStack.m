@@ -1,7 +1,7 @@
-function [rgb_stack, gray_stack] = loadFocalStack(focal_stack_dir)
+function [rgb_stack] = loadImageStack(upload_dir)
 
-%fnames = dir([focal_stack_dir '/*.jpg']);
-fnames = dir([focal_stack_dir]);
+%fnames = dir([upload_dir '/*.jpg']);
+fnames = dir([upload_dir]);
 names = {fnames.name};
 % remove . and .. files
 names = names(cellfun(@(x) x(1), names) ~= '.');
@@ -11,15 +11,13 @@ cac = regexprep( names,                          ...
 [ ~, ixs ] = sort(str2double(cac));
 names = names(ixs);
 
-img = imread([focal_stack_dir '/' char(names(1))]);
+img = imread([upload_dir '/' char(names(1))]);
 [m,n,~] = size(img);
 k = length(names);
-rgb_stack = zeros(m,n,3*k);
-gray_stack = zeros(m,n,k);
+rgb_stack = zeros(m,n,3,k, 'uint8'); % must define type as uint8
 for i = 1: k
-    img = imread([focal_stack_dir '/' char(names(i))]);
-    rgb_stack(:,:,3*(i-1)+1:3*(i-1)+3) = img;
-    gray_stack(:,:,i) = rgb2gray(img);
+    img = imread([upload_dir '/' char(names(i))]);
+    rgb_stack(:,:,:,i) = img;
 end
 
 

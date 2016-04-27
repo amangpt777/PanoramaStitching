@@ -9,7 +9,8 @@ orig_imsetting = iptgetpref('ImshowBorder');
 iptsetpref('ImshowBorder', 'tight');
 temp1 = onCleanup(@()iptsetpref('ImshowBorder', orig_imsetting));
 
-fun_handles = {@challengeStitch};
+fun_handles = {@challengeStitch, ...
+               @cylProj};
 
 % Call test harness
 runTests(varargin, fun_handles);
@@ -20,24 +21,22 @@ function challengeStitch()
 % Test image stitching
 
 focal_length_type = 'variable';
-
-% stitch three images
-imgc = im2single(imread('mountain_center.png'));
-imgl = im2single(imread('mountain_left.png'));
-imgr = im2single(imread('mountain_right.png'));
-
-% You are free to change the order of input arguments
+upload_dir = 'upload';
+img_stack = loadImageStack(upload_dir);
 % Should pass the leftMost image first
-stitched_img = stitchImg(imgl, imgc, imgr, focal_length_type);
+
+stitched_img = stitchImg(img_stack, focal_length_type);
 %figure, imshow(stitched_img);
 imwrite(stitched_img, 'mountain_panorama.png');
+%}
 
 %%
-function challenge1f()
-imgl = im2single(imread('left.png'));
-imgc = im2single(imread('center.png'));
-imgr = im2single(imread('right.png'));
-stitched_img = stitchImg(imgl, imgc, imgr);
+function cylProj()
+upload_dir = 'upload1';
+loop = true;
+matchExp = true;
+blend = 'Alpha';
+img_stack = loadImageStack(upload_dir);
+stitched_img = createPanoramaCyl(img_stack, loop, matchExp, blend);
 %figure, imshow(stitched_img);
-imwrite(stitched_img, 'panorama.png');
-% Your own panorama
+imwrite(stitched_img, 'Bascom_panorama.png');
