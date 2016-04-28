@@ -11,6 +11,8 @@
 
 		for($j=0; $j < count($_FILES["item_file"]['name']); $j++) { //loop the uploaded file array
 			
+			$temp = explode(".", $_FILES["item_file"]['name'][$j]);
+			$newfilename = 'image_'. ($j+1) . '.' . end($temp);   // rename the file with order number
 			$filen = $_FILES["item_file"]['name'][$j];	
 
 			// ingore empty input fields
@@ -18,8 +20,13 @@
 			{
 		
 				// destination path - you can choose any file name here (e.g. random)
-				$path = "upload/" . $filen; 
-
+				//$path = "upload/" . $filen; 
+				$path = "upload/" . $newfilename;
+                
+                if ($j == 0) {
+                    array_map('unlink', glob('upload/*'));   // delete all the files in upload directory
+                }
+                
 				if(move_uploaded_file($_FILES["item_file"]['tmp_name']["$j"],$path)) { 
 				
 					echo "File# ".($j+1)." ($filen) uploaded successfully!<br>"; 
