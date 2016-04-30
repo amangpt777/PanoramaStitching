@@ -21,10 +21,11 @@ function challengeStitch()
 % Test image stitching
 
 focal_length_type = 'variable';
+
 upload_dir = 'upload';
 img_stack = loadImageStack(upload_dir);
-% Should pass the leftMost image first
 
+% Should pass the leftMost image first
 stitched_img = stitchImg(img_stack, focal_length_type);
 %figure, imshow(stitched_img);
 imwrite(stitched_img, 'mountain_panorama.png');
@@ -34,9 +35,9 @@ imwrite(stitched_img, 'mountain_panorama.png');
 function cylProj()
 upload_dir = 'upload1';
 loop = true;
-matchExp = true;
 blend = 'Alpha';
 img_stack = loadImageStack(upload_dir);
-stitched_img = createPanoramaCyl(img_stack, loop, matchExp, blend);
-%figure, imshow(stitched_img);
+stitched_img = createPanoramaCyl(img_stack, loop, blend);
+figure, imshow(stitched_img);
 imwrite(stitched_img, 'Bascom_panorama.png');
+%}
