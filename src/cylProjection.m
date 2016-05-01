@@ -1,9 +1,4 @@
-%% warp image into cylindrical coordinates and correct radial distortion
-%  input:   img - source image
-%           f - focal length
-%           k1, k2 - radial distortion parameters
-%  output:  cylImg - cylindrical warpped images
-function [ cylImg ] = cylProj( img, f, k1, k2 )
+function [ cylImg ] = cylProjection( img, f, k1, k2 )
 img = im2double(img);
 % image information
 height = size(img, 1);

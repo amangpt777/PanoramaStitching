@@ -1,12 +1,4 @@
-%% create panorama image using cylindrical projection
-%  input:   imgs - source images
-%           f - local length
-%           k1, k2 - radial distortion parameters
-%           loop - is is a full panorama?
-%           matchExp - match exposures across images?
-%           blend - use which blending technique? 'Alpha' or 'Pyramid'
-%  output:  newImg - panorama image
-function [ newImg ] = createPanoramaCyl( imgs, loop, blend )
+function [ newImg ] = createCylPanorama( imgs, loop)
 
 % estimate focal length
 ransac_n = 50; % Max number of iteractions
@@ -28,7 +20,7 @@ end
 f = mean(focal);
 %f = 2500;
 %fprintf('focal length is %12.4f \n', f);
-k1 = -0.15;
+k1 = -0.15; %radial distortion parameters
 k2 = 0.00;
 
 
@@ -41,7 +33,7 @@ end
 nImgs = size(imgs, 4);
 cylImgs = zeros(size(imgs), 'like', imgs);
 for i = 1 : nImgs
-    cylImgs(:, :, :, i) = cylProj(imgs(:, :, :, i), f, k1, k2);
+    cylImgs(:, :, :, i) = cylProjection(imgs(:, :, :, i), f, k1, k2);
 end
 
 
@@ -97,16 +89,11 @@ end
 
 % image mask - 1 for image & 0 for border
 mask = ones(height, width);
-mask = logical(cylProj(mask, f, k1, k2));
+mask = logical(cylProjection(mask, f, k1, k2));
 
 % merging images
-if strcmp(blend, 'Alpha')
-    newImg = mergeAlpha(cylImgs, mask, accTranslations, newHeight, newWidth);
-elseif strcmp(blend, 'Pyramid')
-    newImg = mergePyramid( cylImgs, accTranslations, newHeight );
-else % if strcmp(blend, 'NoBlend')
-    newImg = mergeNoBlend(cylImgs, mask, accTranslations, newHeight, newWidth);
-end
+newImg = mergeBlendImgs(cylImgs, mask, accTranslations, newHeight, newWidth);
+
 
 % cropping image
 if loop

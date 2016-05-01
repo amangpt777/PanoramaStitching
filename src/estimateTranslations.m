@@ -3,7 +3,6 @@
 %  output:  translations - translation matrices to align each pair of images
 function [ translations ] = estimateTranslations( imgs )
 % parameters
-edgeThresh = 10;
 successProb = 0.99;
 inlierRatio = 0.3;
 epsilon = 1.5;
@@ -22,7 +21,7 @@ for i = 2 : nImgs
     matches = zeros(np,3,2);  % matches [col row z=1, 2]
     matches(:,:,1) = [locs(:,2) locs(:,1) ones(np,1)];
     matches(:,:,2) = [locd(:,2) locd(:,1) ones(np,1)];
-    translations(:, :, i) = RANSAC(successProb, inlierRatio, 1, matches, epsilon, @computeTranslation, @compError);
+    translations(:, :, i) = RANSAC(successProb, inlierRatio, 1, matches, epsilon, @computeTranslation, @applyTranslation);
     img_prev = img_curr;
 end
 end

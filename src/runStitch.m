@@ -35,9 +35,8 @@ imwrite(stitched_img, 'mountain_panorama.png');
 function cylProj()
 upload_dir = 'upload1';
 loop = true;
-blend = 'Alpha';
 img_stack = loadImageStack(upload_dir);
-stitched_img = createPanoramaCyl(img_stack, loop, blend);
+stitched_img = createCylPanorama(img_stack, loop);
 figure, imshow(stitched_img);
 imwrite(stitched_img, 'Bascom_panorama.png');
 %}
