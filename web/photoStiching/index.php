@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Simple Multi File Uploader with Progressbar</title>
+<title>Panorama Stitching</title>
 <meta name="description" content="Free PHP multi file uploader script with progress bar which is easy to configure and use." />
 <meta http-equiv="Language" content="en" />
 <meta name="language" content="en" />
@@ -103,7 +103,7 @@ var max_number =20;
 </head>
 
 <body>
-<p><b>Simple Multi File Uploader with Progressbar</b></p>
+<p><b>Upload the files you want to stitch</b></p>
 
 <form enctype="multipart/form-data" action="upload.php" method="post" name="upload-form" id="upload-form">
 
