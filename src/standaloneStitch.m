@@ -77,7 +77,7 @@ for i = 2 : nImgs
     [mask, dest_img] = backwardWarpImg(imgs, inv(R_3x3), dest_canvas_width_height, f0, f1);
     blended_result = blendImagePair(dest_img, mask, imgd, maskSource,...
     'blend');
-    imshow(blended_result);
+    %imshow(blended_result);
     center_img = blended_result;
     %}
 end
