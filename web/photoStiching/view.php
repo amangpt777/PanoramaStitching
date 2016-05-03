@@ -105,7 +105,7 @@
       </div>
       <div class="content">
         <div class="panorama">
-         <img class="image" src="./Output/mountain_panorama.png">
+         <img class="image" src="./Output1/Bascom_panorama.png">
         </div>
       </div>
     </div>
