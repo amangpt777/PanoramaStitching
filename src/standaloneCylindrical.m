@@ -5,7 +5,7 @@ tic
 img_stack = loadImageStack(upload_dir);
 stitched_img = createCylPanorama(img_stack, loop);
 %figure, imshow(stitched_img);
-imwrite(stitched_img, './Output1/Bascom_panorama.png');
+imwrite(stitched_img, './Output1/cylindrical_panorama.png');
 toc
 end
 
