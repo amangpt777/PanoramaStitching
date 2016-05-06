@@ -1,5 +1,5 @@
 function cylProj()
-upload_dir = './upload';
+upload_dir = './upload1';
 loop = true;
 tic
 img_stack = loadImageStack(upload_dir);
