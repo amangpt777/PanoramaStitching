@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <title>Panorama</title>
@@ -97,14 +96,6 @@
   </script>
 </head>
 <body>
-<?php
-	
-	$output = exec('sudo sh runCylindrical.sh', $out);
-	
-?>
-
-
-
 
   <div class="wrapper">
     <div class="main">

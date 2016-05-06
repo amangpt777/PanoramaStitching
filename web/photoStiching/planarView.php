@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <title>Panorama</title>
   <script type="text/javascript" src="lib/jquery-2.js"></script>
-  <script type="text/javascript" src="lib/jquery.panorama_viewer.js"></script>
   <script type="text/javascript">
    function toggle_visibility(id) {
        var e = document.getElementById(id);
