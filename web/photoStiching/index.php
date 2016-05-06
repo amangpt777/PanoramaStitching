@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Simple Multi File Uploader with Progressbar</title>
+<title>Panorama Stitching</title>
 <meta name="description" content="Free PHP multi file uploader script with progress bar which is easy to configure and use." />
 <meta http-equiv="Language" content="en" />
 <meta name="language" content="en" />
@@ -18,13 +18,10 @@
 <!-- script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.js" type="text/javascript"></script -->
 <script src="lib/jquery.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript">
-
 // allow all extensions
 var exts = "";
-
 // only allow specific extensions
 // var exts = "jpg|jpeg|gif|png|bmp|tiff|pdf";
-
 function checkExtension(value)
 {
     if(value=="")return true;
@@ -34,22 +31,17 @@ function checkExtension(value)
         alert("Your file extension is not allowed: \n" + value + "\n\nOnly the following extensions are allowed: "+exts.replace(/\|/g,',')+" \n\n");
         return false;
     }
-
     return true;
 }
-
 $(document).ready(function() { 
 //
-
 //show the progress bar only if a file field was clicked
 	var show_bar = 0;
     $('input[type="file"]').click(function(){
 		show_bar = 1;
     });
-
 //show iframe on form submit
     $("#upload-form").submit(function(){
-
 		if (show_bar === 1) { 
 			$('#progress-frame').show();
 			function set () {
@@ -59,14 +51,9 @@ $(document).ready(function() {
 		}
     });
 //
-
 });
-
-
 var next_id=0;
-
 var max_number =20;
-
 	function _add_more() {
 		
 		if (next_id>=max_number)
@@ -74,15 +61,12 @@ var max_number =20;
 			alert("You reached maximum number of 20 files!");
 			return;
 		}
-
 		next_id=next_id+1;
 		var next_div=next_id+1;
 		var txt = "<br><input type=\"file\" name=\"item_file[]\" onChange=\"checkExtension(this.value)\">";
 		txt+='<div id="dvFile'+next_div+'"></div>';
 		document.getElementById("dvFile" + next_id ).innerHTML = txt;
 	}
-
-
 	function validate(f){
 		var chkFlg = false;
 		for(var i=0; i < f.length; i++) {
@@ -103,7 +87,7 @@ var max_number =20;
 </head>
 
 <body>
-<p><b>Simple Multi File Uploader with Progressbar</b></p>
+<p><b>Upload the files you want to stitch</b></p>
 
 <form enctype="multipart/form-data" action="upload.php" method="post" name="upload-form" id="upload-form">
 
@@ -122,5 +106,3 @@ var max_number =20;
 	<!---->
 </body>
 </html> 
-
-
