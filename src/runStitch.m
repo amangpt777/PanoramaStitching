@@ -25,7 +25,7 @@ focal_length_type = 'variable';
 upload_dir = 'upload';
 tic
 img_stack = loadImageStack(upload_dir);
-% Should pass the leftMost image first
+%img_stack = autoDetect(upload_dir);
 stitched_img = stitchImg(img_stack, focal_length_type);
 %figure, imshow(stitched_img);
 imwrite(stitched_img, 'mountain_panorama.png');
@@ -37,9 +37,10 @@ function cylProj()
 upload_dir = 'upload1';
 loop = true;
 tic
-img_stack = loadImageStack(upload_dir);
+%img_stack = loadImageStack(upload_dir);
+img_stack = autoDetect(upload_dir);
 stitched_img = createCylPanorama(img_stack, loop);
 %figure, imshow(stitched_img);
-imwrite(stitched_img, 'Bascom_panorama.png');
+imwrite(stitched_img, 'EH_panorama.png');
 toc
 %}

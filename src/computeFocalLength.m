@@ -5,7 +5,7 @@ function [f0, f1] = computeFocalLength(img, H_3x3, type)
 %     f = computeFocalLength(H, 'fixed') returns one focal length
 %     f = computeFocalLength(H, 'variable') returns two focal lengths
 
-
+%{
 if H_3x3(1,1) * H_3x3(1,3) - H_3x3(1,2) * H_3x3(2,2) ~= 0
     numer = H_3x3(1,3) * H_3x3(2,3);
     denom = H_3x3(1,1) * H_3x3(2,1) + H_3x3(1,2) * H_3x3(2,2);
@@ -27,7 +27,7 @@ end
 
 %}
 
-%{
+
 if ~exist('nx', 'var')
     [ny, nx] = size(img);
 end
@@ -128,7 +128,7 @@ alpha_c = alpha_init;
 f0 = f_init(1);
 f1 = f_init(2);
 
-
+%{
 fprintf(1,'\n\nCalibration parameters after initialization:\n\n');
 fprintf(1,'Focal Length:          fc = [ %3.5f   %3.5f ]\n',fc);
 fprintf(1,'Principal point:       cc = [ %3.5f   %3.5f ]\n',cc);
